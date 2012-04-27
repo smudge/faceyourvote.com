@@ -1,0 +1,30 @@
+body {
+
+}
+header {
+  text-align:center;
+  text-transform:uppercase;
+}
+
+header h1 {
+  font-family: 'Cabin Sketch', sans-serif;
+  font-size: 4em;
+  margin:0;
+  color:#009;
+}
+header h2 {
+  font-family: 'Love Ya Like A Sister';
+  margin:-20px 0;
+  color:#900;
+}
+header h3 {
+  margin:0;
+  font-family: 'Just Another Hand';
+  font-size:2em;
+  font-weight:normal;
+  text-transform:none;
+}
+
+#container {
+  width:750px; margin:20px auto;
+}

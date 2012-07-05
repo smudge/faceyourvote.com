@@ -38,7 +38,7 @@ window.onload = function () {
     }
     var dem = (stateData[stateName][1]-4)/2.0;
     var rep = (stateData[stateName][2]-4)/2.0;
-    //var diff = 0;
+    var diff = 0;
 
     if (rep > dem) {
       //diff = Math.round(100-100*rep);
@@ -65,8 +65,8 @@ window.onload = function () {
 
       st[0].onmouseover = function () {
         //st.animate({fill: "#ddd"}, 200);
-        st.animate({"stroke-width": "2"}, 100);
-        st.scale(hoverScale)
+        st.animate({"stroke-width": "3",stroke: "#505"}, 75);
+        //st.scale(hoverScale)
         st.toFront();
         usRaphael["dc"].toFront(); //exception for DC
         R.safari();
@@ -85,7 +85,7 @@ window.onload = function () {
       st[0].onmouseout = function () {
         //if (selected != state) {
         st.animate({fill: st.color, stroke: "#fff", "stroke-width": "0.75"}, 100);
-        st.scale(1/hoverScale)
+        //st.scale(1/hoverScale)
         st.toFront();
         usRaphael["dc"].toFront(); //exception for DC
         R.safari();

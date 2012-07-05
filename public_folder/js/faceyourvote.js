@@ -65,7 +65,7 @@ window.onload = function () {
 
       st[0].onmouseover = function () {
         //st.animate({fill: "#ddd"}, 200);
-        st.animate({"stroke-width": "3",stroke: "#505"}, 75);
+        st.animate({"stroke-width": "3",stroke: "#fff"}, 75);
         //st.scale(hoverScale)
         st.toFront();
         usRaphael["dc"].toFront(); //exception for DC

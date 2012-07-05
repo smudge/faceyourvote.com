@@ -1,5 +1,6 @@
 body {
   background: url(/img/bgnoise.gif);
+  font-family: 'Doppio One', sans-serif;
 }
 
 header {
@@ -33,16 +34,25 @@ header h1 {
 }
 header h3 {
   margin:0;
-  font-family: 'Doppio One', sans-serif;
   position:relative; z-index: 1;
   font-size:0.9em;
   font-weight:normal;
   text-transform:none;
 }
 
+.content {
+  width:772px;
+  margin: 0 auto;
+}
+
+.tip {
+  font-size:0.8em;
+}
+
 #container {
+  margin:0 auto;
   padding:20px 10px 0;
   background: url(/img/diagonal-noise.png);
   border: 1px solid rgba(24,40,107,0.05);
-  width:750px; margin:20px auto;
+  width:750px;
 }

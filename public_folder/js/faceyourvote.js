@@ -1,7 +1,15 @@
 var selected;
 
 var width = 800.0;
-var height = 800.0;
+var height = 500.0;
+
+var demR = 24;
+var demG = 40;
+var demB = 107;
+
+var repR = 136;
+var repG = 10;
+var repB = 10;
 
 var defaultAttr = {
   "stroke": "#fff",
@@ -30,19 +38,20 @@ window.onload = function () {
     }
     var dem = (stateData[stateName][1]-4)/2.0;
     var rep = (stateData[stateName][2]-4)/2.0;
-    var diff = 0;
-    
+    //var diff = 0;
+
     if (rep > dem) {
-      diff = 100-rep*100
-      rep = Math.round(diff+155)
-      dem = diff;
-    } else {
-      diff = 100-dem*100;
-      dem = Math.round(diff+155)
-      rep = diff;
+      //diff = Math.round(100-100*rep);
+      //rState.color = "rgb("+(diff+repR)+","+(diff+repG)+","+(diff+repB)+")";
+      rState.color = "rgba("+repR+","+repG+","+repB+","+(rep*0.7+0.3)+")";
+    } else if (rep < dem) {
+      //diff = Math.round(100-100*dem);
+      //rState.color = "rgb("+(diff+demR)+","+(diff+demG)+","+(diff+demB)+")";
+      rState.color = "rgba("+demR+","+demG+","+demB+","+(dem*0.7+0.3)+")";
+   } else {
+      rState.color = "rgba(150,100,150,0.5)";
     }
-    
-    rState.color = "rgb("+rep+","+diff+","+dem+")";
+
     rState.attr({fill: rState.color});
     usRaphael[state] = rState;
   }
@@ -55,7 +64,8 @@ window.onload = function () {
       st[0].style.cursor = "pointer";
 
       st[0].onmouseover = function () {
-        st.animate({fill: "#ddd"}, 200);
+        //st.animate({fill: "#ddd"}, 200);
+        st.animate({"stroke-width": "2"}, 100);
         st.scale(hoverScale)
         st.toFront();
         usRaphael["dc"].toFront(); //exception for DC
@@ -74,7 +84,7 @@ window.onload = function () {
       
       st[0].onmouseout = function () {
         //if (selected != state) {
-        st.animate({fill: st.color }, 200);
+        st.animate({fill: st.color, stroke: "#fff", "stroke-width": "0.75"}, 100);
         st.scale(1/hoverScale)
         st.toFront();
         usRaphael["dc"].toFront(); //exception for DC

@@ -1,7 +1,7 @@
 
 # DataMapper setup - this will use the Rack env variable 'DATABASE_URL' if available
 # (it is provided by Heroku). Otherwise, create or use local SQLite development.db
-DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
+# DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
 
 # Create models here, e.g.
 # class Person
@@ -11,14 +11,16 @@ DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/developm
 # end
 
 # Automated schema changes
-DataMapper.auto_upgrade!
+# DataMapper.auto_upgrade!
 
 # Routes
 
 get "/css/:sheet.css" do |sheet|
-  sass :"css/#{sheet}"
+  puts "get #{sheet}.css"
+  scss :"css/#{sheet}"
 end
 
 get "/" do
-  haml :index
+  puts "get '/'"
+  erb :index
 end

@@ -28,7 +28,7 @@ var stateData =
 	'Missouri'					: [10, 2, 4],
 	'Montana'					  : [ 3, 2, 4],
 	'Nebraska'					: [ 5, 2, 4],
-	'Nevada'					  : [ 6, 6, 0],
+	'Nevada'					  : [ 6, 3, 3],
 	'New Hampshire'			: [ 4, 5, 1],
 	'New Jersey'				: [14, 6, 0],
 	'New Mexico'				: [ 5, 6, 0],

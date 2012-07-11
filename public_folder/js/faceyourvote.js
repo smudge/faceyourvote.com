@@ -1,4 +1,4 @@
-var previousState;
+var currentState;
 
 var width = 800.0;
 var height = 500.0;
@@ -71,20 +71,20 @@ window.onload = function () {
       var star = "<span>&#9733;</span>";
 
       $(st[0]).hover(function () {
-        selectState(st);
-        cleanup(R,rStates);
-        $("#hoverTip").fadeOut();
-        $("#mainHeader").html(star+stateName+star);
+        if (currentState != st) {
+          selectState(st);
+          cleanup(R,rStates);
+          $("#hoverTip").fadeOut();
+          $("#mainHeader").html(star+stateName+star);
+          currentState = st;
+        }
       }, function () {
         deselectState(st);
-        previousState = st;
         cleanup(R,rStates);
         $("#mainHeader").html("Face"+star+"Your"+star+"Vote");
+        currentState = null;
       }).click(function () {
-        if (previousState != null && st != previousState) {
-          deselectState(previousState);
-          previousState = null;
-        }
+        //Maybe sticky-select on click?
       }).css('cursor', 'pointer');
 
       /*st[0].onclick = function () {

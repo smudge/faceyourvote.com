@@ -71,9 +71,7 @@ window.onload = function () {
       var star = "<span>&#9733;</span>";
 
       $(st[0]).hover(function () {
-        if (previousState) { deselectState(previousState) };
         selectState(st);
-        previousState = null;
         cleanup(R,rStates);
         $("#hoverTip").fadeOut();
         $("#mainHeader").html(star+stateName+star);
@@ -82,6 +80,11 @@ window.onload = function () {
         previousState = st;
         cleanup(R,rStates);
         $("#mainHeader").html("Face"+star+"Your"+star+"Vote");
+      }).click(function () {
+        if (previousState != null && st != previousState) {
+          deselectState(previousState);
+          previousState = null;
+        }
       }).css('cursor', 'pointer');
 
       /*st[0].onclick = function () {

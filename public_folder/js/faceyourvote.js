@@ -70,10 +70,10 @@ window.onload = function () {
 
       $(st[0]).hover(function () {
         selectState(st);
-        cleanup(R);
+        cleanup(R,rStates);
       }, function () {
         deselectState(st);
-        cleanup(R);
+        cleanup(R,rStates);
       }).css('cursor', 'pointer');
 
       /*st[0].onclick = function () {

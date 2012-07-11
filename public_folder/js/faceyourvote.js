@@ -1,5 +1,3 @@
-var selected;
-
 var width = 800.0;
 var height = 500.0;
 
@@ -24,30 +22,26 @@ var defaultAttr = {
 var scale = width / 1000.0;
 var hoverScale = 1.1;
 
-var rStates = {};
 
 var selectState = function(st) {
-  //st.animate({fill: "#ddd"}, 200);
   st.animate({"stroke-width": "3",stroke: "#fff"}, 75);
-  //st.scale(hoverScale)
   st.toFront();
-  rStates["dc"].toFront(); //exception for DC
-  R.safari();
 };
 
 var deselectState = function(st) {
   //if (selected != state) {
   st.animate({fill: st.color, stroke: "#fff", "stroke-width": "0.75"}, 100);
-  //st.scale(1/hoverScale)
-  st.toFront();
+};
+
+var cleanup = function(R,rStates) {
   rStates["dc"].toFront(); //exception for DC
-  R.safari();
-  //}
+  R.safari(); //fixes some rendering bugs in safari.
 };
 
 window.onload = function () {
   var R = Raphael("container", width, height),
-    attr = defaultAttr;
+    attr = defaultAttr,
+    rStates = {};
 
   //Draw Map and store Raphael paths
   for (var stateName in stateAbbrev) {
@@ -61,12 +55,8 @@ window.onload = function () {
     var diff = 0;
 
     if (rep > dem) {
-      //diff = Math.round(100-100*rep);
-      //rState.color = "rgb("+(diff+repR)+","+(diff+repG)+","+(diff+repB)+")";
       rState.color = "rgba("+repR+","+repG+","+repB+","+(rep*0.7+0.3)+")";
     } else if (rep < dem) {
-      //diff = Math.round(100-100*dem);
-      //rState.color = "rgb("+(diff+demR)+","+(diff+demG)+","+(diff+demB)+")";
       rState.color = "rgba("+demR+","+demG+","+demB+","+(dem*0.7+0.3)+")";
    } else {
       rState.color = "rgba(150,100,150,0.5)";
@@ -74,20 +64,18 @@ window.onload = function () {
 
     rState.attr({fill: rState.color});
     rStates[state] = rState;
-  }
 
-  //Do Work on Map
-  for (var state in rStates) {
-
+    //Do Work on Map
     (function (st, state) {
 
-      st[0].style.cursor = "pointer";
-
-      $(st[0]).mouseover(function () {
+      $(st[0]).hover(function () {
         selectState(st);
-      }).mouseleave(function () {
+        cleanup(R);
+      }, function () {
         deselectState(st);
-      });
+        cleanup(R);
+      }).css('cursor', 'pointer');
+
       /*st[0].onclick = function () {
         if (selected != null && selected != state) {
           var sstate = rStates[selected];
@@ -97,9 +85,8 @@ window.onload = function () {
         }
         selected = state;
       };*/
-
-
     })(rStates[state], state);
+
   }
 
 };

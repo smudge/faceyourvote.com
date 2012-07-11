@@ -58,7 +58,7 @@ window.onload = function () {
       rState.color = "rgba("+repR+","+repG+","+repB+","+(rep*0.7+0.3)+")";
     } else if (rep < dem) {
       rState.color = "rgba("+demR+","+demG+","+demB+","+(dem*0.7+0.3)+")";
-   } else {
+    } else {
       rState.color = "rgba(150,100,150,0.5)";
     }
 

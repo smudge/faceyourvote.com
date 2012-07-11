@@ -24,11 +24,31 @@ var defaultAttr = {
 var scale = width / 1000.0;
 var hoverScale = 1.1;
 
+var rStates = {};
+
+var selectState = function(st) {
+  //st.animate({fill: "#ddd"}, 200);
+  st.animate({"stroke-width": "3",stroke: "#fff"}, 75);
+  //st.scale(hoverScale)
+  st.toFront();
+  rStates["dc"].toFront(); //exception for DC
+  R.safari();
+};
+
+var deselectState = function(st) {
+  //if (selected != state) {
+  st.animate({fill: st.color, stroke: "#fff", "stroke-width": "0.75"}, 100);
+  //st.scale(1/hoverScale)
+  st.toFront();
+  rStates["dc"].toFront(); //exception for DC
+  R.safari();
+  //}
+};
+
 window.onload = function () {
   var R = Raphael("container", width, height),
-    attr = defaultAttr,
-  usRaphael = {};
-  
+    attr = defaultAttr;
+
   //Draw Map and store Raphael paths
   for (var stateName in stateAbbrev) {
     var state = stateAbbrev[stateName].toLowerCase();
@@ -53,47 +73,33 @@ window.onload = function () {
     }
 
     rState.attr({fill: rState.color});
-    usRaphael[state] = rState;
+    rStates[state] = rState;
   }
-  
+
   //Do Work on Map
-  for (var state in usRaphael) {
-    
+  for (var state in rStates) {
+
     (function (st, state) {
 
       st[0].style.cursor = "pointer";
 
       $(st[0]).mouseover(function () {
-        //st.animate({fill: "#ddd"}, 200);
-        st.animate({"stroke-width": "3",stroke: "#fff"}, 75);
-        //st.scale(hoverScale)
-        st.toFront();
-        usRaphael["dc"].toFront(); //exception for DC
-        R.safari();
+        selectState(st);
+      }).mouseleave(function () {
+        deselectState(st);
       });
-      
       /*st[0].onclick = function () {
         if (selected != null && selected != state) {
-          var sstate = usRaphael[selected];
+          var sstate = rStates[selected];
           sstate.attr({fill: sstate.color });
           sstate.toFront();
           R.safari();
         }
         selected = state;
       };*/
-      
-      $(st[0]).mouseout(function () {
-        //if (selected != state) {
-        st.animate({fill: st.color, stroke: "#fff", "stroke-width": "0.75"}, 100);
-        //st.scale(1/hoverScale)
-        st.toFront();
-        usRaphael["dc"].toFront(); //exception for DC
-        R.safari();
-        //}
 
-      });
-                 
-    })(usRaphael[state], state);
+
+    })(rStates[state], state);
   }
-          
+
 };

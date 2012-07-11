@@ -1,3 +1,5 @@
+var previousState;
+
 var width = 800.0;
 var height = 500.0;
 
@@ -30,7 +32,7 @@ var selectState = function(st) {
 
 var deselectState = function(st) {
   //if (selected != state) {
-  st.animate({fill: st.color, stroke: "#fff", "stroke-width": "0.75"}, 100);
+  st.animate({fill: st.color, stroke: "#fff", "stroke-width": "0.75"}, 70);
 };
 
 var cleanup = function(R,rStates) {
@@ -47,9 +49,8 @@ window.onload = function () {
   for (var stateName in stateAbbrev) {
     var state = stateAbbrev[stateName].toLowerCase();
     var rState = R.path(usMap[state]).attr(attr).scale(scale, scale, 0, 0);
-    if (state == "dc") {
-      rState.scale(3); //exception for DC
-    }
+    if (state == "dc") { rState.scale(3); } //exception for DC
+
     var dem = (stateData[stateName][1]-4)/2.0;
     var rep = (stateData[stateName][2]-4)/2.0;
     var diff = 0;
@@ -66,14 +67,21 @@ window.onload = function () {
     rStates[state] = rState;
 
     //Do Work on Map
-    (function (st, state) {
+    (function (st, stateAbbrev, stateName) {
+      var star = "<span>&#9733;</span>";
 
       $(st[0]).hover(function () {
+        if (previousState) { deselectState(previousState) };
         selectState(st);
+        previousState = null;
         cleanup(R,rStates);
+        $("#hoverTip").fadeOut();
+        $("#mainHeader").html(star+stateName+star);
       }, function () {
         deselectState(st);
+        previousState = st;
         cleanup(R,rStates);
+        $("#mainHeader").html("Face"+star+"Your"+star+"Vote");
       }).css('cursor', 'pointer');
 
       /*st[0].onclick = function () {
@@ -85,7 +93,7 @@ window.onload = function () {
         }
         selected = state;
       };*/
-    })(rStates[state], state);
+    })(rStates[state], state, stateName);
 
   }
 

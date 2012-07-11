@@ -63,14 +63,14 @@ window.onload = function () {
 
       st[0].style.cursor = "pointer";
 
-      st[0].onmouseover = function () {
+      $(st[0]).mouseover(function () {
         //st.animate({fill: "#ddd"}, 200);
         st.animate({"stroke-width": "3",stroke: "#fff"}, 75);
         //st.scale(hoverScale)
         st.toFront();
         usRaphael["dc"].toFront(); //exception for DC
         R.safari();
-      };
+      });
       
       /*st[0].onclick = function () {
         if (selected != null && selected != state) {
@@ -82,7 +82,7 @@ window.onload = function () {
         selected = state;
       };*/
       
-      st[0].onmouseout = function () {
+      $(st[0]).mouseout(function () {
         //if (selected != state) {
         st.animate({fill: st.color, stroke: "#fff", "stroke-width": "0.75"}, 100);
         //st.scale(1/hoverScale)
@@ -91,7 +91,7 @@ window.onload = function () {
         R.safari();
         //}
 
-      };
+      });
                  
     })(usRaphael[state], state);
   }

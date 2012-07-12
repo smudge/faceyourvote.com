@@ -69,6 +69,10 @@ window.onload = function () {
     //Do Work on Map
     (function (st, stateAbbrev, stateName) {
       var star = "<span>&#9733;</span>";
+      var dem = stateData[stateName][1];
+      var rep = stateData[stateName][2];
+
+
 
       $(st[0]).hover(function () {
         if (currentState != st) {
@@ -76,12 +80,16 @@ window.onload = function () {
           cleanup(R,rStates);
           $("#hoverTip").fadeOut();
           $("#mainHeader").html(star+stateName+star);
+          $("#romney").css('background-image', "url(/img/r"+rep+".jpg)");
+          $("#obama").css('background-image', "url(/img/d"+dem+".jpg)");
           currentState = st;
         }
       }, function () {
         deselectState(st);
         cleanup(R,rStates);
         $("#mainHeader").html("Face"+star+"Your"+star+"Vote");
+        $("#romney").css('background-image', "url(/img/r2.jpg)");
+        $("#obama").css('background-image', "url(/img/d2.jpg)");
         currentState = null;
       }).click(function () {
         //Maybe sticky-select on click?

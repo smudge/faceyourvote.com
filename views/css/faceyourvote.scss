@@ -51,6 +51,20 @@ header h3 {
   text-transform:none;
 }
 
+#obama, #romney {
+height:100px;width:100px;
+position:relative;
+margin-bottom:-100px;
+top:-80px;
+float:left;
+background-image:url(/img/d2.jpg);
+}
+
+#romney {
+float:right;
+background-image:url(/img/r2.jpg);
+}
+
 .content {
   width:772px;
   margin: 0 auto;

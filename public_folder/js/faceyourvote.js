@@ -66,13 +66,33 @@ window.onload = function () {
     rState.attr({fill: rState.color});
     rStates[state] = rState;
 
+    function pulse(obj,margin){
+      if (!margin) { margin='marginLeft'; }
+      obj.stop();
+      obj.stop();
+      var animStart = {
+        width: '106px',
+        height: '106px',
+        backgroundSize: '106px',
+        marginTop: '-3px'
+      };
+      animStart[margin] = '-3px';
+      var animEnd = {
+        width: "100px",
+        height: "100px",
+        marginTop: "0px",
+        backgroundSize: '100px'
+      };
+      animEnd[margin] = "0px";
+      obj.animate(animEnd,0);
+      obj.animate(animStart,100);
+      obj.animate(animEnd,100);
+    };
     //Do Work on Map
     (function (st, stateAbbrev, stateName) {
       var star = "<span>&#9733;</span>";
       var dem = stateData[stateName][1];
       var rep = stateData[stateName][2];
-
-
 
       $(st[0]).hover(function () {
         if (currentState != st) {
@@ -82,6 +102,8 @@ window.onload = function () {
           $("#mainHeader").html(star+stateName+star);
           $("#romney").css('background-image', "url(/img/r"+rep+".jpg)");
           $("#obama").css('background-image', "url(/img/d"+dem+".jpg)");
+          pulse($("#obama"));
+          pulse($("#romney"),'marginRight');
           currentState = st;
         }
       }, function () {

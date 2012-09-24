@@ -74,6 +74,14 @@ background-image:url(/img/d2.jpg);
   top:17px;
 }
 
+#evSlider:before {
+  content:"|";
+  text-align:center;
+  position:absolute;
+  top:-20px;
+  width:100%;
+}
+
 .slider {
   width:14.2857%;
   float:left;

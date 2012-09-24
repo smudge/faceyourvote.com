@@ -13,7 +13,7 @@ body {
 header {
   width:772px;
   margin:0 auto;
-  padding: 20px 0 20px 0;
+  padding: 20px 0 0;
   height:100px;
   text-align:center;
   //text-shadow: rgba(150, 150, 150, 0.35) 3px 3px 0px;
@@ -54,11 +54,51 @@ header h3 {
 #obama, #romney {
 height:100px;width:100px;
 position:relative;
-margin-bottom:-100px;
+margin-bottom:-80px;
 top:-80px;
 float:left;
 background-image:url(/img/d2.jpg);
 }
+
+#stats {
+  width:772px;
+  margin: 10px auto 20px;
+}
+
+#evSlider {
+  position:relative;
+  width:500px;
+  height:10px;
+  border: 1px solid #000;
+  margin: 0 auto -12px;
+  top:17px;
+}
+
+.slider {
+  width:14.2857%;
+  float:left;
+  height:10px;
+}
+
+#c0 { background-color:rgba(24,40,107,1.0); }
+#c1 { background-color:rgba(24,40,107,0.7); }
+#c2 { background-color:rgba(24,40,107,0.5); }
+#c3 { background-color:rgba(255,255,255,1.0); }
+#c4 { background-color:rgba(136,10,10,0.5);float:right; }
+#c5 { background-color:rgba(136,10,10,0.7);float:right; }
+#c6 { background-color:rgba(136,10,10,1.0);float:right; }
+
+
+#stats .ev {
+  text-align:center;
+  width:100px;
+  font-size: 2.5em;
+  line-height:1em;
+  padding:5px 0;
+  border: 1px solid #000;
+}
+#obama_ev { float:left; color:rgb(24,40,107); }
+#romney_ev { float:right; color:rgb(186,10,10);}
 
 #romney {
 float:right;
@@ -88,6 +128,14 @@ background-image:url(/img/r2.jpg);
 
 .tip {
   font-size:0.8em;
+}
+
+#hoverTip {
+  float:left;
+}
+
+#lastUpdated {
+  float:right;
 }
 
 #container {
